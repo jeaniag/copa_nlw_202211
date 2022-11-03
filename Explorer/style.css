@@ -4,41 +4,70 @@
   box-sizing: border-box;
 }
 
+:root {
+  --card-color-primary: #f7dd43;
+  --card-title-border-color: #746615;
+  --card-bg-color: #1d1c19;
+  --body-bg: url(./assets/bg-yellow.svg);
+}
+body.blue {
+  --card-color-primary: #338af3;
+  --card-title-border-color: #338af3;
+  --card-bg-color: #202024;
+  --body-bg: url(./assets/bg-blue.svg);
+}
+
+body.green {
+  --card-color-primary: #047c3f;
+  --card-title-border-color: #047c3f;
+  --card-bg-color: #1a1f1b;
+  --body-bg: url(./assets/bg-green.svg);
+}
+
 ul {
   list-style: none;
 }
 
 body {
   background-color: #121214;
-  background-image: url(./assets/bg-blue.svg);
-  background-position-x: center;
-  background-position-y: -715px;
+  background-image: var(--body-bg);
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  /* Fazendo o mesmo que acima em uma linha só 
+  background:#121214 var(--body-bg) no-repeat top center/cover ; */
 }
 
 body * {
   font-family: "Roboto", sans-serif;
 }
 
-#app{
-  text-align: center;
+#app {
+  width: fit-content;
+  margin: auto;
+  padding-top: 53px;
+  /* text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
 }
 
 header {
-  margin-top: 63px; 
+  margin-top: 63px;
   margin-bottom: 63px;
   text-align: center;
-/*  display: flex;
+  /*  display: flex;
   flex-direction: column;
   align-items: center;*/
 }
 
-#cards{
+#cards {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 32px;
+  margin-bottom: 32px;
 }
 
 .card {
@@ -48,8 +77,8 @@ header {
   flex-direction: column;
   align-items: center;
 
-  background: #1d1c19;
-  border-bottom: 2px solid #f7dd43;
+  background: var(--card-bg-color);
+  border-bottom: 2px solid var(--card-color-primary);
   border-radius: 6px;
 }
 
@@ -60,7 +89,7 @@ header {
   align-items: center;
 
   padding: 8px 16px;
-  border: 1px solid #746615;
+  border: 1px solid var(--card-title-border-color);
   border-radius: 6px;
 
   width: fit-content;
@@ -84,7 +113,7 @@ header {
   width: 270px;
 }
 
-.card ul li  {
+.card ul li {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -100,5 +129,48 @@ header {
   font-size: 36px;
   line-height: 125%;
 
-  color: #E1E1E6;
+  color: #e1e1e6;
+}
+.card h2:hover,
+.card ul li strong:hover,
+.card ul li img:hover {
+  transform: scale(1.1);
+}
+.card h2,
+.card ul li strong,
+.card ul li img {
+  transition: transform 0.3s;
+}
+
+.card {
+  opacity: 0;
+  animation: appear 0.7s forwards;
+}
+
+/* Faz uma ordem e aplica delay nos vários cards que teremos*/
+/* .card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.card:nth-child(3) {
+  animation-delay: 0.3s;
+} */
+
+/* aparece em 0.7s e desliza no eixo y em 0.3s */
+@keyframes appear {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@media (min-width: 400px) {
+  #cards {
+    max-width: 670px;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }
